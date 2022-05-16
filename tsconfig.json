@@ -23,7 +23,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.spec.tsx"
-  ],
+, "src/services/prismicio.js"  ],
   "exclude": [
     "node_modules"
   ]
