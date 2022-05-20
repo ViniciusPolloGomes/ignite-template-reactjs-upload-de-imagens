@@ -44,23 +44,8 @@ export interface FileInputProps {
   trigger: UseFormTrigger<FieldValues>;
 }
 
-const FileInputBase: ForwardRefRenderFunction<
-  HTMLInputElement,
-  FileInputProps
-> = (
-  {
-    name,
-    error = null,
-    setImageUrl,
-    localImageUrl,
-    setLocalImageUrl,
-    setError,
-    onChange,
-    trigger,
-    ...rest
-  },
-  ref
-) => {
+const FileInputBase: ForwardRefRenderFunction<HTMLInputElement,FileInputProps >= (
+  {name,error = null,setImageUrl,localImageUrl,setLocalImageUrl,setError,onChange,trigger,...rest},ref) => {
   const toast = useToast();
   const [progress, setProgress] = useState(0);
   const [isSending, setIsSending] = useState(false);

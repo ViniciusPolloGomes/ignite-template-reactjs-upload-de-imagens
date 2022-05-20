@@ -9,6 +9,8 @@ import { Loading } from '../components/Loading';
 import { Error } from '../components/Error';
 
 export default function Home(): JSX.Element {
+
+
   const {
     data,
     isLoading,
