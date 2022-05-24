@@ -2,7 +2,7 @@ import { extendTheme } from '@chakra-ui/react';
 
 export const theme = extendTheme({
   colors: {
-    gray: {
+    pGray: {
       '50': '#F3F2F2',
       '100': '#DDDCDA',
       '200': '#C7C5C2',

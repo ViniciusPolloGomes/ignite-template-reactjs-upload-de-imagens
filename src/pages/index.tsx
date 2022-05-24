@@ -1,23 +1,27 @@
 import { Button, Box } from '@chakra-ui/react';
-import { useMemo, useState } from 'react';
-import { useInfiniteQuery } from 'react-query';
+import { useMemo, useState ,ReactNode} from 'react';
+import { GetNextPageParamFunction, useInfiniteQuery } from 'react-query';
 
 import { Header } from '../components/Header';
 import { CardList } from '../components/CardList';
-import { api } from '../services/api';
 import { Loading } from '../components/Loading';
 import { Error } from '../components/Error';
 import { query, Query } from 'faunadb';
+import { string } from 'yup/lib/locale';
+import axios from 'axios';
 
 
-export default function Home(): JSX.Element {
 
-  const responseGetImages = () => {
-      api.get('http://localhost:3000/images',{
-        params:{
-
-        }
-      })
+export default function Home():JSX.Element{
+  
+  const responseGetImages = async ({pageParam = null}) => {
+    const response = await axios.get('/api/images',{
+      params:{
+        after: pageParam,
+      }
+    })
+    return response.data
+    
   }
 
   const {
@@ -31,18 +35,27 @@ export default function Home(): JSX.Element {
     ['images'],
     responseGetImages
     ,
-    // TODO GET AND RETURN NEXT PAGE PARAM
-    {}
+    {                                           // TODO GET AND RETURN NEXT PAGE PARAM
+      getNextPageParam: lastPage => {
+        return lastPage.after ?? null;
+      },
+    }
   );
 
+  
   const formattedData = useMemo(() => {
-    // TODO FORMAT AND FLAT DATA ARRAY
+     if(data){                                  // TODO FORMAT AND FLAT DATA ARRAY
+       return data.pages.map(page =>{
+         return page.data;
+       }).flat();
+     }
+     return[];
   }, [data]);
-
+  console.log(formattedData)
   // TODO RENDER LOADING SCREEN
 
   // TODO RENDER ERROR SCREEN
-
+  
   return (
     <>
      
