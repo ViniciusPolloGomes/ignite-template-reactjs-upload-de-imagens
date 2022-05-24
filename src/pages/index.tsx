@@ -1,12 +1,11 @@
-import { Button, Box } from '@chakra-ui/react';
-import { useMemo, useState ,ReactNode} from 'react';
-import { GetNextPageParamFunction, useInfiniteQuery } from 'react-query';
+import { Button, Box,} from '@chakra-ui/react';
+import { useMemo} from 'react';
+import { useInfiniteQuery } from 'react-query';
 
 import { Header } from '../components/Header';
 import { CardList } from '../components/CardList';
 import { Loading } from '../components/Loading';
 import { Error } from '../components/Error';
-import { query, Query } from 'faunadb';
 import { string } from 'yup/lib/locale';
 import axios from 'axios';
 
@@ -52,9 +51,21 @@ export default function Home():JSX.Element{
      return[];
   }, [data]);
   console.log(formattedData)
+
   // TODO RENDER LOADING SCREEN
+  if(isLoading) {
+    return (
+      <Loading/>
+    )
+  }
 
   // TODO RENDER ERROR SCREEN
+  if(isError){
+    return (
+      <Error/>
+    );
+  }
+  
   
   return (
     <>
@@ -62,7 +73,7 @@ export default function Home():JSX.Element{
       <Header />
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
-         {/*<CardList cards={formattedData} />*/}
+         <CardList cards={formattedData} />
           
           {/* TODO RENDER LOAD MORE BUTTON IF DATA HAS NEXT PAGE */}
       </Box>

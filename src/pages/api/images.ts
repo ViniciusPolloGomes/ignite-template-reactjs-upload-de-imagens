@@ -46,8 +46,8 @@ export default async function handler(
       })
       .catch(err =>
         res
-          .status(501)
-          .json({ error: `Sorry something Happened! ${err.message}` })
+        .status(501)
+        .json({ error: `Sorry something Happened! ${err.message}` })
       );
   }
 
@@ -81,10 +81,12 @@ export default async function handler(
           after: response.after ? response.after[0].id : null,
         });
       })
-      .catch(err => {
+     .catch(err => {
         return res.status(400).json(err);
       });
   }
 
   return res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
 }
+
+
