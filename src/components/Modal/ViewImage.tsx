@@ -8,6 +8,7 @@ import {
   Link,
 } from '@chakra-ui/react';
 
+
 interface ModalViewImageProps {
   isOpen: boolean;
   onClose: () => void;
@@ -19,5 +20,21 @@ export function ModalViewImage({
   onClose,
   imgUrl,
 }: ModalViewImageProps): JSX.Element {
-  return (<></>)// TODO MODAL WITH IMAGE AND EXTERNAL LINK
+  return (
+    <>
+      <Modal  onClose={onClose} isOpen={isOpen} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalBody pb={6} x="900px" y="600px" >
+            <Image src={imgUrl}/>
+          </ModalBody>
+          <ModalFooter>
+            <Link href={imgUrl} isExternal>
+              Abrir a Original 
+            </Link>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
+  ) // TODO MODAL WITH IMAGE AND EXTERNAL LINK
 }

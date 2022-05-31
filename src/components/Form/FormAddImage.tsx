@@ -17,14 +17,51 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const toast = useToast();
  
   const formValidations = {
+    
     image: {
-      // TODO REQUIRED, LESS THAN 10 MB AND ACCEPTED FORMATS VALIDATIONS
+      // TODO ok REQUIRED, LESS THAN 10 MB AND ACCEPTED FORMATS VALIDATIONS
+      required: {
+        value: true,
+        message: "Arquivo Obrigatório"},
+      validate:{
+        lessThan10MB: (file)=> file[0]?.size < 10000000 
+            || 
+            "O arquivo deve ser menor que 10MB",
+
+        acceptedFormats: (file) => ["image/jpeg", "image/png", "image/gif"]
+          .includes(file[0]?.type)
+            ||
+            "Somente são aceitos arquivos PNG, JPEG e GIF" ,
+      }
+      //Documentation https://www.codegrepper.com/code-examples/javascript/react-hook-form+file+validation
     },
     title: {
-      // TODO REQUIRED, MIN AND MAX LENGTH VALIDATIONS
+       // TODO ok REQUIRED, MIN AND MAX LENGTH VALIDATIONS
+      required :{
+        value: true ,
+        message :"Título Obrigatório"
+      },
+      minLength: {
+        value: 2,
+        message: "Mínimo de 2 caracteres." 
+      },
+      maxLength:{
+        value: 20,
+        message: "Máximo de 20 caracteres."
+      },
+      // https://regexr.com/ pattern syntax Details
+      //pattern: /([A-Za-z])\w {2}/g
     },
     description: {
-      // TODO REQUIRED, MAX LENGTH VALIDATIONS
+      // TODO ok REQUIRED, MAX LENGTH VALIDATIONS
+      required:{
+        value: true,
+        message:"Descrição Obrigatória."
+      },
+      maxLength:{
+        value: 65,
+        message: "Máximo de 65 caracteres."
+      }   
     },
   };
 
@@ -32,7 +69,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const mutation = useMutation(
     // TODO MUTATION API POST REQUEST,
     {
-      // TODO ONSUCCESS MUTATION
+      // TODO ONSUCCESS MUTATION 
     }
   );
 
@@ -49,12 +86,17 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const onSubmit = async (data: Record<string, unknown>): Promise<void> => {
     try {
       // TODO SHOW ERROR TOAST IF IMAGE URL DOES NOT EXISTS
+
       // TODO EXECUTE ASYNC MUTATION
+
       // TODO SHOW SUCCESS TOAST
+
     } catch {
       // TODO SHOW ERROR TOAST IF SUBMIT FAILED
+
     } finally {
       // TODO CLEAN FORM, STATES AND CLOSE MODAL
+
     }
   };
 
@@ -67,20 +109,21 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
           setLocalImageUrl={setLocalImageUrl}
           setError={setError}
           trigger={trigger}
-          error={errors.image}// TODO SEND IMAGE ERRORS
-          {...register('image')}// TODO REGISTER IMAGE INPUT WITH VALIDATIONS
+                               // TODO ok SEND IMAGE ERRORS
+          {...register('image',formValidations.image)}// TODO ok REGISTER IMAGE INPUT WITH VALIDATIONS
         />
 
         <TextInput
           placeholder="Título da imagem..."
-          error={errors.title}// TODO SEND TITLE ERRORS
-          {...register('title')}// TODO REGISTER TITLE INPUT WITH VALIDATIONS
+          error={errors.title}// TODO ok SEND TITLE ERRORS
+          {...register('title',formValidations.title
+        )}// TODO ok REGISTER TITLE INPUT WITH VALIDATIONS
         />
 
         <TextInput
           placeholder="Descrição da imagem..."
-          error={errors.description}// TODO SEND DESCRIPTION ERRORS
-          {...register('description')}// TODO REGISTER DESCRIPTION INPUT WITH VALIDATIONS
+          error={errors.description}// TODO ok SEND DESCRIPTION ERRORS
+          {...register('description', formValidations.description)}// TODO ok REGISTER DESCRIPTION INPUT WITH VALIDATIONS
         />
       </Stack>
 
@@ -89,8 +132,9 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
         isLoading={formState.isSubmitting}
         isDisabled={formState.isSubmitting}
         type="submit"
-        w="100%"
+        w={"100%"}
         py={6}
+        
       >
         Enviar
       </Button>
