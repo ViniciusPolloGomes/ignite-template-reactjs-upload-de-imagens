@@ -36,5 +36,5 @@ export function ModalViewImage({
         </ModalContent>
       </Modal>
     </>
-  ) // TODO MODAL WITH IMAGE AND EXTERNAL LINK
+  ) // TODO ok MODAL WITH IMAGE AND EXTERNAL LINK
 }

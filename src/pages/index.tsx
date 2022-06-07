@@ -16,6 +16,7 @@ export default function Home(): JSX.Element {
         after: pageParam,
       },
     });
+    console.log(JSON.stringify(response.data,null,6))
     return response.data;
   };
 
@@ -27,25 +28,26 @@ export default function Home(): JSX.Element {
     fetchNextPage,
     hasNextPage,
     isFetching,
-  } = useInfiniteQuery(['images'], responseGetImages, {
+  } = useInfiniteQuery(['images'], responseGetImages, {// TODO ok AXIOS REQUEST WITH PARAM
     staleTime:1000*5, //10 seconds
     // TODO ok GET AND RETURN NEXT PAGE PARAM
     getNextPageParam: lastPage => {
       return lastPage.after ?? null;
     },
   });
-
+  console.log(JSON.stringify(data,null,6))
   const formattedData = useMemo(() => {
     if (data) {
       // TODO ok FORMAT AND FLAT DATA ARRAY
-      return data.pages
-        .map(page => {
+      return data.pages.map(page => {
           return page.data;
         })
         .flat();
     }
     return [];
   }, [data]);
+
+  console.log(JSON.stringify(formattedData))
 
   // TODO ok RENDER LOADING SCREEN
   if (isLoading) {
