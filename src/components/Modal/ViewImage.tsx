@@ -49,7 +49,7 @@ export function ModalViewImage({
                   h="4rem"
                   w="100%"
                   justifyContent="left"
-                  focus
+                  
             >
             <Link href={imgUrl} 
                   isExternal 
