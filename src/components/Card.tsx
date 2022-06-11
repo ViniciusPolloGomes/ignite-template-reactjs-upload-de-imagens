@@ -24,18 +24,18 @@ export function Card({ data, viewImage }: CardProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <Box key={data.ts} borderRadius="md" bgColor="pGray.800">
+    <Box key={data.ts} borderRadius="md" bgColor="pGray.800" h="100%" >
       <Skeleton isLoaded={!isLoading}>
         <Image
           src={data.url}
           alt={data.title}
           objectFit="cover"
-          w="max"
           h={48}
           borderTopRadius="md"
           onClick={() => viewImage(data.url)}
           onLoad={() => setIsLoading(false)}
           cursor="pointer"
+          w="100%"
         />
       </Skeleton>
 
@@ -47,8 +47,8 @@ export function Card({ data, viewImage }: CardProps): JSX.Element {
           </>
         ) : (
           <>
-            <Heading fontSize="2xl">{data.title}</Heading>
-            <Text mt={2.5} fontSize="md">
+            <Heading fontSize="2xl" color="gray.50" fontWeight="bold">{data.title}</Heading>
+            <Text mt={2.5} fontSize="md" color="pGray.300" fontWeight="normal" >
               {data.description}
             </Text>
           </>

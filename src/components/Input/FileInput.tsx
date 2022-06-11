@@ -90,7 +90,7 @@ const FileInputBase: ForwardRefRenderFunction<HTMLInputElement,FileInputProps >=
           formData,
           config
         );
-        console.log(response)
+        console.log(response.data)
 
         setImageUrl(response.data.data.url);
         setLocalImageUrl(URL.createObjectURL(event.target.files[0]));

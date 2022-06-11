@@ -1,4 +1,5 @@
 import { Flex, SimpleGrid, useDisclosure } from '@chakra-ui/react';
+import { stringify } from 'querystring';
 import { useState } from 'react';
 import { Card } from './Card';
 import { ModalViewImage } from './Modal/ViewImage';
@@ -21,23 +22,27 @@ export function CardList({ cards }: CardsProps): JSX.Element {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
   // TODO ok SELECTED IMAGE URL STATE
-    const [imgurl, setImgUrl] = useState('');
+    const [imgUrl, setImgUrl] = useState('');
 
   // TODO ok FUNCTION HANDLE VIEW IMAGE
   function handlerViewImage(imgUrl: string){
-    setImgUrl(imgurl);
+    setImgUrl(imgUrl)
     onOpen();
   }
-
+  
+  //console.log(cards)
   return (
     < SimpleGrid columns={3} spacing={"40px"} >
-      {cards.map((card) => {
+      {cards.map((cards) => {
+        
+        //console.log(JSON.stringify(card,null,4))
           return (
-            <Flex direction="column" key={card.id}>
+          
+            <Flex direction="column" key={cards.id}>
               {/* TODO ok CARD GRID */}
-                <Card data={card} viewImage={() => handlerViewImage(card.url)}/>
+                <Card data={cards} viewImage={() => handlerViewImage(cards.url)}/>
               {/* TODO ok MODALVIEWIMAGE */}
-              <ModalViewImage  isOpen={isOpen} onClose={onClose} imgUrl={imgurl} /> 
+              <ModalViewImage   isOpen={isOpen} onClose={onClose} imgUrl={imgUrl} /> 
             </Flex>  
           )
       })}

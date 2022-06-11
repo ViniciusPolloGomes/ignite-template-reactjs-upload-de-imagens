@@ -6,20 +6,19 @@ import { Header } from '../components/Header';
 import { CardList } from '../components/CardList';
 import { Loading } from '../components/Loading';
 import { Error } from '../components/Error';
-import { string } from 'yup/lib/locale';
 import axios from 'axios';
+import { api } from '../services/api';
 
 export default function Home(): JSX.Element {
   const responseGetImages = async ({ pageParam = null }) => {
-    const response = await axios.get('/api/images', {
+    const response = await api.get('/api/images', {
       params: {
         after: pageParam,
       },
     });
-    console.log(JSON.stringify(response.data,null,6))
     return response.data;
   };
-
+  
   const {
     data, //É um objeto contendo dados de consulta infinitos:
     isLoading,
@@ -28,14 +27,14 @@ export default function Home(): JSX.Element {
     fetchNextPage,
     hasNextPage,
     isFetching,
-  } = useInfiniteQuery(['images'], responseGetImages, {// TODO ok AXIOS REQUEST WITH PARAM
-    staleTime:1000*5, //10 seconds
+  } = useInfiniteQuery('images', responseGetImages, {// TODO ok AXIOS REQUEST WITH PARAM
+    /*staleTime:1000*5,  //10 seconds*/
     // TODO ok GET AND RETURN NEXT PAGE PARAM
     getNextPageParam: lastPage => {
       return lastPage.after ?? null;
     },
   });
-  console.log(JSON.stringify(data,null,6))
+  
   const formattedData = useMemo(() => {
     if (data) {
       // TODO ok FORMAT AND FLAT DATA ARRAY
@@ -46,12 +45,10 @@ export default function Home(): JSX.Element {
     }
     return [];
   }, [data]);
-
-  console.log(JSON.stringify(formattedData))
-
+ // console.log(JSON.stringify(formattedData))
   // TODO ok RENDER LOADING SCREEN
   if (isLoading) {
-    return <Loading />;
+     return <Loading />;
   }
 
   // TODO ok RENDER ERROR SCREEN
@@ -68,18 +65,14 @@ export default function Home(): JSX.Element {
 
         {/*TODO  ok RENDER LOAD MORE BUTTON IF DATA HAS NEXT PAGE*/}
         <Flex>
-          <Button
-            mt="6"
-            size="lg"
-            onClick={() => fetchNextPage()}
-            disabled={!hasNextPage || isFetchingNextPage}
-          >
-            {isFetchingNextPage
-              ? 'Carregando mais...'
-              : hasNextPage
-              ? 'Carregar mais'
-              : 'Não há mais dados a serem carregados'}
-          </Button>
+          {hasNextPage && (
+            <Button
+              mt="10"
+              onClick={() => fetchNextPage()}
+            >
+              {isFetchingNextPage ? 'Carregando...' : 'Carregar mais'}
+            </Button>
+          )}
         </Flex>
       </Box>
     </>

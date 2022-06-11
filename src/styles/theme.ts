@@ -48,7 +48,16 @@ export const theme = extendTheme({
     global: {
       body: {
         bg: 'pGray.900',
-        color: 'pGray.50',
+        color: 'pGray.50'
+      },
+      a:{
+        color:'inherit',
+        display: 'inline-block',
+        textDecoration: "inherit",
+        _hover:{
+          color: 'white',
+          textDecoration: "inherit",
+        },
       },
     },
   },

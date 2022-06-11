@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import fauna from 'faunadb';
+import { Console } from 'console';
 
 const { query } = fauna;
 const client = new fauna.Client({ 
@@ -75,7 +76,7 @@ export default async function handler(
           ts: item.ts,
           id: item.ref.id,
         }));
-
+        
         return res.json({
           data: formattedData,
           after: response.after ? response.after[0].id : null,
