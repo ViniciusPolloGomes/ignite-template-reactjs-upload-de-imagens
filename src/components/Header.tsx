@@ -7,7 +7,7 @@ export function Header(): JSX.Element {
 
   return (
     <>
-      <Box bgColor="pGray.800">
+      <Box bgColor="pGray.800" >
         <Flex
           justifyContent="space-between"
           alignItems="center"

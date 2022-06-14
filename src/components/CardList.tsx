@@ -37,7 +37,7 @@ export function CardList({ cards }: CardsProps): JSX.Element {
           
           //console.log(JSON.stringify(card,null,4))
             return (
-                  <Flex direction="column" key={cards.id} h="100%" w="100%" minW="295" marginBottom={[5,0,0]}>
+                  <Flex direction="column" key={cards.id} h="100%" w="100%" minW="295" marginBottom={[5,5,0]}>
                         {/* TODO ok CARD GRID */}
                           <Card data={cards} viewImage={() => handlerViewImage(cards.url)}/>
                         {/* TODO ok MODALVIEWIMAGE */}
