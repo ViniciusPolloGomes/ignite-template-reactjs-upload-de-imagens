@@ -1,4 +1,4 @@
-import { Flex, SimpleGrid, useDisclosure } from '@chakra-ui/react';
+import { Flex, SimpleGrid, useDisclosure, Wrap, WrapItem } from '@chakra-ui/react';
 import { stringify } from 'querystring';
 import { useState } from 'react';
 import { Card } from './Card';
@@ -32,20 +32,19 @@ export function CardList({ cards }: CardsProps): JSX.Element {
   
   //console.log(cards)
   return (
-    < SimpleGrid columns={3} spacing={"40px"} >
-      {cards.map((cards) => {
-        
-        //console.log(JSON.stringify(card,null,4))
-          return (
+      <SimpleGrid columns={[1,2,3]} spacing={["10px","20px","40px"]} >
+        {cards.map((cards) => {
           
-            <Flex direction="column" key={cards.id}>
-              {/* TODO ok CARD GRID */}
-                <Card data={cards} viewImage={() => handlerViewImage(cards.url)}/>
-              {/* TODO ok MODALVIEWIMAGE */}
-              <ModalViewImage   isOpen={isOpen} onClose={onClose} imgUrl={imgUrl} /> 
-            </Flex>  
-          )
-      })}
+          //console.log(JSON.stringify(card,null,4))
+            return (
+                  <Flex direction="column" key={cards.id} h="100%" w="100%" minW="295">
+                        {/* TODO ok CARD GRID */}
+                          <Card data={cards} viewImage={() => handlerViewImage(cards.url)}/>
+                        {/* TODO ok MODALVIEWIMAGE */}
+                        <ModalViewImage   isOpen={isOpen} onClose={onClose} imgUrl={imgUrl} />  
+                  </Flex> 
+            )
+        })}
       </SimpleGrid>
   );
 }
