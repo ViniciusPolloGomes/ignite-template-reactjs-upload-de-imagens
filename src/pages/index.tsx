@@ -60,7 +60,7 @@ export default function Home(): JSX.Element {
     <>
       <Header />
 
-      <Box maxW={1120} px={[5,10,20]} mx="auto" my={[5,10,20]}>
+      <Box maxW={1120} px={[10,15,20]} mx="auto" my={[10,15,20]}>
         <CardList cards={formattedData} />
 
         {/*TODO  ok RENDER LOAD MORE BUTTON IF DATA HAS NEXT PAGE*/}
