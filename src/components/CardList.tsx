@@ -32,12 +32,12 @@ export function CardList({ cards }: CardsProps): JSX.Element {
   
   //console.log(cards)
   return (
-      <SimpleGrid columns={[1,2,3]} spacing={["10px","20px","40px"]}>
+      <SimpleGrid columns={[1,2,3]} spacing={["40px","40px","40px"]}>
         {cards.map((cards) => {
           
           //console.log(JSON.stringify(card,null,4))
             return (
-                  <Flex direction="column" key={cards.id} h="100%" w="100%" minW="295" marginBottom={[5,5,0]}>
+                  <Flex direction="column" key={cards.id} h="100%" w="100%" minW="295">
                         {/* TODO ok CARD GRID */}
                           <Card data={cards} viewImage={() => handlerViewImage(cards.url)}/>
                         {/* TODO ok MODALVIEWIMAGE */}
